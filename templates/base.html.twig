@@ -2,11 +2,106 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />        
+        <link href="" rel="icon">
+        <link href="" rel="apple-touch-icon">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="{{asset('assets/vendor/icofont/icofont.min.css')}}" rel="stylesheet">
+        <link href="{{asset('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
+        <link href="{{asset('assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+        <link href="{{asset('assets/vendor/owl.carousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+        <link href="{{asset('assets/vendor/venobox/venobox.css')}}" rel="stylesheet">
+        <link href="{{asset('assets/vendor/aos/aos.css')}}" rel="stylesheet">
+        <link href="assets/css/style.css" rel="stylesheet">
+
+        {% block stylesheets %}
+        {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+        <header id="header" class="fixed-top d-flex align-items-center">
+            <div class="container d-flex align-items-center">
+
+            <div class="logo mr-auto">
+                <a href="{{path('home')}}"><img src="{{asset('assets/img/logo.png')}}" alt="" class="img-fluid"></a>
+            </div>
+
+            <nav class="nav-menu d-none d-lg-block">
+                <ul>
+                <li class="active"><a href="{{path('home')}}">Accueil</a></li>
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#contact">Contact</a></li>
+
+                <li class="get-started"><a href="{{path('shipping')}}">Test</a></li>
+                </ul>
+            </nav>
+
+            </div>
+        </header>
+            {% if app.request.pathInfo == path('home') %}
+
+                    <section id="hero" class="d-flex align-items-center mt-5">
+
+                        <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+                            <h1 data-aos="fade-up">Améliorer votre logistique avec Sirala</h1>
+                            <h2 data-aos="fade-up" data-aos-delay="400">Nous vous proposons de faire livrer vos clients, où qu'ils soient. Plus besoin d'adresse, nous utilisons la présision des positions GPS. </h2>
+                            <div data-aos="fade-up" data-aos-delay="800">
+                                <a href="{{path('shipping')}}" class="btn-get-started scrollto">Faire un test</a>
+                            </div>
+                            </div>
+                            <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left" data-aos-delay="200">
+                            <img src="{{asset('assets/img/position.png')}}" class="img-fluid animated" alt="">
+                            </div>
+                        </div>
+                        </div>
+
+                    </section>
+
+            {% endif %}
+
+
+        {% block body %}
+        
+        {% endblock %}
+
+        <footer id="footer">
+            <div class="container">
+            <div class="row d-flex align-items-center">
+                <div class="col-lg-6 text-lg-left text-center">
+                <div class="copyright">
+                    &copy; Copyright <strong>Sirala</strong>. Tous droits réservés
+                </div>
+                <div class="credits">
+                Désigné par <a href="https://rashidtamboura.fr/">Rashid Tamboura</a>
+                </div>
+                </div>
+                <div class="col-lg-6">
+                <nav class="footer-links text-lg-right text-center pt-2 pt-lg-0">
+                    <a href="#intro" class="scrollto">Accueil</a>
+                    <a href="#about" class="scrollto">À propos</a>
+                </nav>
+                </div>
+            </div>
+            </div>
+        </footer>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+        <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{asset('assets/vendor/jquery.easing/jquery.easing.min.js')}}"></script>
+        <script src="{{asset('assets/vendor/php-email-form/validate.js')}}"></script>
+        <script src="{{asset('assets/vendor/waypoints/jquery.waypoints.min.js')}}"></script>
+        <script src="{{asset('assets/vendor/counterup/counterup.min.js')}}"></script>
+        <script src="{{asset('assets/vendor/owl.carousel/owl.carousel.min.js')}}"></script>
+        <script src="{{asset('assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+        <script src="{{asset('assets/vendor/venobox/venobox.min.js')}}"></script>
+        <script src="{{asset('assets/vendor/aos/aos.js')}}"></script>
+        <script src="{{asset('assets/js/main.js')}}"></script>
+
     </body>
 </html>

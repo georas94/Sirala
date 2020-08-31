@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+    {% block title %}Choix adresse{% endblock %}
+
+    {% block body %}
+
+    {% block stylesheets %}
+        <style>
+            body {
+                padding: 0;
+                margin: 0;
+                }
+                #map {
+                    height: 80vh;
+                    width: 100%;
+                }
+
+            #main{
+                margin-top:100px;
+            }
+        </style>
+    {% endblock %}
+
+    <main id="main">
+
+        <div class="container mb-5">
+
+        <div class="row mt-3">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div id="map" class="mt-1"></div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <p class="text-center mt-3" id="content"></p> 
+                <button class="btn btn-primary mt-4 btn-block" id="valider">Valider cette adresse</button>
+            </div>
+        </div>
+
+
+        </div>
+    </main>
+        {% block javascripts %}
+            <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+            <script>
+
+                let map = L.map('map').fitWorld();
+                let marker;
+                let markerIcon = L.icon({
+                    iconUrl: 'https://raw.githubusercontent.com/evantdailey/map_testing/master/dot.png',
+                    iconSize: [20,20],
+                });
+
+                L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+                    // Il est toujours bien de laisser le lien vers la source des données
+                    attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+                    minZoom: 1,
+                    maxZoom: 20
+                }).addTo(map);
+
+                map.locate({setView: true, maxZoom: 16});
+
+                function onLocationFound(e) {
+                    marker = new L.marker(e.latlng, {draggable:'true'});
+                    marker.bindTooltip("Vous êtes ici !").openTooltip();
+
+                            marker.on('dragend', function(event){
+                                let marker = event.target;
+                                let position = marker.getLatLng();
+                                marker.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
+                                map.panTo(new L.LatLng(position.lat, position.lng))
+                                
+                                let settings = {
+                                    "async": true,
+                                    "crossDomain": true,
+                                    "url": "https://eu1.locationiq.com/v1/reverse.php?key=7e1a52ec2f6f5f&lat="+ position.lat +"&lon="+position.lng+"&format=json",
+                                    "method": "GET"
+                                }
+
+                                $.ajax(settings).done(function (response) {
+                                    object = Object.values(response);
+                                    let gps =  response.lat +','+ response.lon;
+                                    let address = response.display_name;
+                                    document.getElementById("content").innerHTML = 'Votre adresse :' +' <br> '+ response.display_name; 
+                                });
+
+                            });
+                    map.addLayer(marker);
+                }
+
+                function onLocationError(e) {
+                    console.log(e.message);
+                }
+                
+                map.on('locationfound', onLocationFound);
+                map.on('locationerror', onLocationError);
+                
+            </script>        
+
+        {% endblock %}
+{% endblock %}

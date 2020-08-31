@@ -1,0 +1,65 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Choisissez ! {% endblock %}
+
+{% block body %}
+
+    {% block javascripts %}
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+        <script>
+            let map = L.map('map').fitWorld();
+            let marker;
+            let markerIcon = L.icon({
+                iconUrl: 'https://raw.githubusercontent.com/evantdailey/map_testing/master/dot.png',
+                iconSize: [20,20],
+            });    
+
+
+            L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+                // Il est toujours bien de laisser le lien vers la source des données
+                attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+                minZoom: 1,
+                maxZoom: 20
+            }).addTo(map);
+
+            map.locate({setView: true, maxZoom: 16});
+
+            function onLocationFound(e) {
+                let radius = e.accuracy / 2;
+                //OUBLIE PAS D'ENREGISTRER LA LONGITUDE ET LA LATITUDE alert(e.latlng)
+
+
+                L.marker(e.latlng).addTo(map)
+                    .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+                L.circle(e.latlng, radius).addTo(map);
+            }
+
+            function onLocationError(e) {
+                alert(e.message);
+            }
+
+            map.on('locationfound', onLocationFound);
+            map.on('locationerror', onLocationError);
+
+            map.locate({setView: true, maxZoom: 12});
+
+            map.on('click',function(e){
+                /**
+                if (map) {
+                    map.removeLayer(map);
+                }
+                let coord=e.latlng.toString().split(',');
+                let lat=coord[0].split('(');
+                let long=coord[1].split(')');
+                L.marker(e.latlng).addTo(map);
+                */
+
+                L.marker([43.600000, 1.433333],{title:"MyPoint",alt:"The Big I",draggable:true}).addTo(map);
+
+            });
+
+
+        </script>
+    {% endblock %}
+{% endblock %}
