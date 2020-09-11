@@ -40,19 +40,19 @@
 
                     <form action="" method="post" class="form mt-4">
                         <div class="form-group d-flex flex-column align-items-center">
-                            <h5 class="col-12 text-center">NOM / Prénom</h5>
+                            <h5 class="col-12 text-center control-label">NOM / Prénom</h5>
                             <input type="text" name="name" id="name" class="form-control name rounded-pill w-75" required>
                         </div>
                         <div class="form-group d-flex flex-column align-items-center">
-                            <h5 class="col-12 text-center">Numéro de téléphone avec indicatif</h5>
+                            <h5 class="col-12 text-center control-label">Numéro de téléphone avec indicatif</h5>
                             <input type="number" name="phone" id="phone" class="form-control phone rounded-pill w-50" required>
                         </div>
 
                         <div class="row">
                         
                             <div class="form-group col-6 d-flex flex-column align-items-center">
-                                <h5 class="col-12 text-center">Date de prise en charge</h5>
-                                <input type="date" name="date" id="date" class="form-control date w-50 text-center" required>
+                                <h5 class="col-12 text-center control-label">Date de prise en charge</h5>
+                                <input type="date" name="date" id="date" class="form-control date w-50 text-center" value="2020-01-01" required>
                             </div>
                             <div class="form-group col-6 d-flex flex-column align-items-center">
                                     <h5 class="col-12 text-center">Vous faire livrer à partir de </h5>
@@ -61,8 +61,8 @@
                         </div>
                         
                         <div class="form-group mt-3 text-center mt-5">
-                            <h5 class="col-12 text-center mt-4">Adresse de livraison</h5>
-                            <small class="font-italic"><strong>Cherchez une adresse, double cliquez sur la carte pour placer un point de repère (lieu de livraison). <br> Vous pouvez ensuite déplacer le point si besoin et valider</strong></small>
+                            <h5 class="col-12 text-center mt-4 control-label">Adresse de livraison</h5>
+                            <small class="font-italic"><strong>Cherchez une adresse, puis double cliquez sur la carte pour placer un point de repère (lieu de livraison). <br> Vous pouvez ensuite déplacer le point si besoin et valider</strong></small>
 
                             <div id="map" class="mt-1"></div>
                             <input type="text" name="content" id="content" value="" class="form-control rounded-pill mt-1 bg-secondary text-white text-center" required>
